@@ -392,3 +392,175 @@ class WithGCD(useAXI4: Boolean = false, useBlackBox: Boolean = false, useHLS: Bo
   }
 })
 // DOC include end: GCD config fragment
+
+
+// =========================================================
+
+
+case class SecPeriphParams(
+  address: BigInt = 0x4000,
+  width: Int = 32,
+  useAXI4: Boolean = false,
+  useBlackBox: Boolean = true,
+  useHLS: Boolean = false)
+
+case object SecPeriphKey extends Field[Option[SecPeriphParams]](None)
+
+// IO
+class SecPeriphIO(val w: Int) extends Bundle {
+  val clock = Input(Clock())
+  val reset = Input(Bool())
+  val key_size = Input(UInt(w.W))
+  val cycles = Input(UInt(w.W))
+  val start_address = Input(UInt(w.W))
+  val start = Input(Bool())
+  val key_0 = Output(UInt(w.W))
+  val key_1 = Output(UInt(w.W))
+  val key_2 = Output(UInt(w.W))
+  val key_3 = Output(UInt(w.W))
+  val unstability = Output(UInt(w.W))
+  val sram_on = Output(Bool())
+  val sram_rdy = Input(Bool())
+  val read_data = Output(UInt(8.W))
+  val busy = Output(Bool())
+  val valid = Output(Bool())
+}
+
+class SecPeriphTopIO extends Bundle {
+  //val busy = Output(Bool())
+  val sram_on = Output(Bool())
+  val sram_rdy = Input(Bool())
+  val sram_data = Output(UInt(8.W))
+}
+
+trait HasSecPeriphTopIO {
+  def io: SecPeriphTopIO
+}
+
+// Chisel BlackBox definition
+class SecurityPeripheral(val w: Int) extends BlackBox(
+  Map(
+    "MAX_CYCLES" -> IntParam(127),
+    "METRIC_SIZE" -> IntParam(4),
+    "WORDS" -> IntParam(4)
+  )) with HasBlackBoxResource {
+  val io = IO(new SecPeriphIO(w))
+  addResource("/vsrc/security_peripheral.sv")
+  addResource("/vsrc/secret_generator.sv")
+  addResource("/vsrc/cumulator.sv")
+  addResource("/vsrc/RM_IHPSG13_1P_256x8_c3_bm_bist.v")
+  addResource("/vsrc/RM_IHPSG13_1P_core_behavioral_bm_bist.v")
+}
+
+// BlackBox instantiation, LazyModule wrapper instantiating TileLink RegisterNode
+class SecPeriphTL(params: SecPeriphParams, beatBytes: Int)(implicit p: Parameters) extends ClockSinkDomain(ClockSinkParameters())(p) {
+  val device = new SimpleDevice("secperiph", Seq("inria,secperiph")) 
+  val node = TLRegisterNode(Seq(AddressSet(params.address, 4096-1)), device, "reg/control", beatBytes=beatBytes)
+
+  override lazy val module = new SecPeriphImpl
+  class SecPeriphImpl extends Impl with HasSecPeriphTopIO {
+    val io = IO(new SecPeriphTopIO)
+    withClockAndReset(clock, reset) {
+      val status = Wire(UInt(3.W))
+      val key_size = Reg(UInt(params.width.W))
+      val cycles = Reg(UInt(params.width.W))
+      val start_address = Reg(UInt(params.width.W))
+      val start = Wire(new DecoupledIO(UInt(params.width.W)))
+      val key_0 = Wire(new DecoupledIO(UInt(params.width.W)))
+      val key_1 = Wire(new DecoupledIO(UInt(params.width.W)))
+      val key_2 = Wire(new DecoupledIO(UInt(params.width.W)))
+      val key_3 = Wire(new DecoupledIO(UInt(params.width.W)))
+      val unstability = Wire(new DecoupledIO(UInt(params.width.W)))
+
+      val impl_io = {
+        val impl = Module(new SecurityPeripheral(params.width))
+        impl.io
+      }
+
+      impl_io.clock := clock
+      impl_io.reset := reset.asBool
+
+      impl_io.key_size := key_size
+      impl_io.cycles := cycles
+      impl_io.start_address := start_address
+      impl_io.start := start.valid
+      start.ready := true.B
+      key_0.bits := impl_io.key_0
+      key_1.bits := impl_io.key_1
+      key_2.bits := impl_io.key_2
+      key_3.bits := impl_io.key_3
+      key_0.valid := impl_io.valid
+      key_1.valid := impl_io.valid
+      key_2.valid := impl_io.valid
+      key_3.valid := impl_io.valid
+      unstability.bits := impl_io.unstability
+      unstability.valid := impl_io.valid
+
+      //io.busy := impl_io.busy
+      io.sram_on := impl_io.sram_on
+      impl_io.sram_rdy := io.sram_rdy
+      io.sram_data := impl_io.read_data
+
+      status := Cat(io.sram_rdy, impl_io.valid, impl_io.busy)
+
+      node.regmap(
+        0x00 -> Seq(
+          RegField.r(3, status)), // read-only
+        0x04 -> Seq(
+          RegField.w(params.width, key_size)), // a plain, write-only register
+        0x08 -> Seq(
+          RegField.w(params.width, cycles)), // a plain, write-only register
+        0x0C -> Seq(
+          RegField.w(params.width, start_address)), // a plain, write-only register
+        0x10 -> Seq(
+          RegField.w(1, start)), // write-only, start is set on write
+        0x14 -> Seq(
+          RegField.r(params.width, key_0)), // read-only
+        0x18 -> Seq(
+          RegField.r(params.width, key_1)), // read-only
+        0x1C -> Seq(
+          RegField.r(params.width, key_2)), // read-only
+        0x20 -> Seq(
+          RegField.r(params.width, key_3)), // read-only
+        0x24 -> Seq(
+          RegField.r(params.width, unstability))) // read-only
+    }
+  }
+}
+
+// Lazy trait
+trait CanHaveSecPeriph { this: BaseSubsystem =>
+  private val portName = "sec_periph"
+
+  private val pbus = locateTLBusWrapper(PBUS)
+
+  // Only TL (nonAXI4) version
+  val sec_periph_io = p(SecPeriphKey) match {
+    case Some(params) => {
+      val sec_periph = {
+        val sec_periph = LazyModule(new SecPeriphTL(params, pbus.beatBytes)(p))
+        sec_periph.clockNode := pbus.fixedClockNode
+        pbus.coupleTo(portName) { sec_periph.node := TLFragmenter(pbus.beatBytes, pbus.blockBytes) := _ }
+        sec_periph
+      }
+      val sec_periph_io = InModuleBody {
+        val top_io = IO(new SecPeriphTopIO).suggestName("sec_periph_io")
+        //top_io.busy := sec_periph.module.io.busy
+        top_io.sram_on := sec_periph.module.io.sram_on
+        sec_periph.module.io.sram_rdy := top_io.sram_rdy
+        top_io.sram_data := sec_periph.module.io.sram_data
+        top_io
+      }
+      Some(sec_periph_io)
+    }
+    case None => None
+  }
+}
+
+class WithSecPeriph(useAXI4: Boolean = false, useBlackBox: Boolean = false, useHLS: Boolean = false) extends Config((site, here, up) => {
+  case SecPeriphKey => {
+    // useHLS cannot be used with useAXI4 and useBlackBox
+    assert(!useHLS || (useHLS && !useAXI4 && !useBlackBox)) 
+    Some(SecPeriphParams(useAXI4 = useAXI4, useBlackBox = useBlackBox, useHLS = useHLS))
+  }
+})

@@ -17,12 +17,27 @@ class DualRocketConfig extends Config(
   new chipyard.config.AbstractConfig)
 
 class TinyRocketConfig extends Config(
+  new chipyard.harness.WithSecPeriphHarness ++
+  new chipyard.iobinders.WithSecPunchthrough ++
+  new chipyard.example.WithSecPeriph() ++
+  new chipyard.harness.WithDontTouchChipTopPorts(false) ++        // TODO FIX: Don't dontTouch the ports
   new testchipip.soc.WithNoScratchpads ++                         // All memory is the Rocket TCMs
   new freechips.rocketchip.subsystem.WithIncoherentBusTopology ++ // use incoherent bus topology
   new freechips.rocketchip.subsystem.WithNBanks(0) ++             // remove L2$
   new freechips.rocketchip.subsystem.WithNoMemPort ++             // remove backing memory
   new freechips.rocketchip.rocket.With1TinyCore ++                // single tiny rocket-core
   new chipyard.config.AbstractConfig)
+
+class MyRocketConfig extends Config( 
+  //new chipyard.config.WithIHPIOCells ++                     // replace IO cells with IHP pads
+  new chipyard.harness.WithSecPeriphHarness ++              // drive peripheral top-level input
+  new chipyard.iobinders.WithSecPunchthrough ++             // connect peripheral ports to top-level
+  new chipyard.example.WithSecPeriph() ++                   // add peripheral
+  new testchipip.soc.WithOnChipMainMemory ++                // add main sram memory
+  new freechips.rocketchip.subsystem.WithNoMemPort ++             // remove backing memory
+  new testchipip.soc.WithNoScratchpads ++
+  new freechips.rocketchip.rocket.WithMyCore ++                   // single tiny rocket-core
+  new chipyard.config.MyAbstractConfig)
 
 class QuadRocketConfig extends Config(
   new freechips.rocketchip.rocket.WithNHugeCores(4) ++    // quad-core (4 RocketTiles)

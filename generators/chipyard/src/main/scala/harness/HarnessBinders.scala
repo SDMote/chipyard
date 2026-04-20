@@ -335,45 +335,8 @@ class WithResetFromHarness extends HarnessBinder({
   }
 })
 
-class WithOffchipBusSelPlusArg extends HarnessBinder({
-  case (th: HasHarnessInstantiators, port: OffchipSelPort, chipId: Int) => {
-    val pin = PlusArg("offchip_sel", width=port.io.getWidth)
-    port.io := pin
-  }
-})
-
-class WithCTCTiedOff extends HarnessBinder({
-  case (th: HasHarnessInstantiators, port: CTCPort, chipId: Int) => {
-    port.io match {
-      case io: CreditedSourceSyncPhitIO => {
-        io.clock_in := false.B.asClock
-        io.reset_in := false.B.asAsyncReset
-        io.in := DontCare
-      }
-      case io: CTCBridgeIO => {
-        io.manager_flit := DontCare
-        io.manager_flit.in.valid := false.B
-        io.manager_flit.out.ready := false.B
-        io.client_flit := DontCare
-        io.client_flit.in.valid := false.B
-        io.client_flit.out.ready := false.B
-      }
-    }
-  }
-})
-
-class WithCTCLoopback extends HarnessBinder({
-  case (th: HasHarnessInstantiators, port: CTCPort, chipId: Int) => {
-    port.io match {
-      case io: CreditedSourceSyncPhitIO => {
-        io.clock_in := io.clock_out
-        io.reset_in := io.reset_out
-        io.in := io.out
-      }
-      case io: CTCBridgeIO => {
-        io.client_flit.in <> io.manager_flit.out
-        io.manager_flit.in <> io.client_flit.out
-      }
-    }
+class WithSecPeriphHarness extends HarnessBinder({
+  case (th: TestHarness, port: SecPort, chipId: Int) => {
+    port.io.sram_rdy := true.B
   }
 })

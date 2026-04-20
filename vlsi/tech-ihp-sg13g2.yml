@@ -1,0 +1,7 @@
+# Technology Setup
+vlsi.core.technology: "hammer.technology.ihp-sg13g2"
+
+# technology files installation directory
+technology.ihp-sg13g2:
+  install_dir: "/home/alfonso/.ciel/ihp-sg13g2>"
+  sram22_sky130_macros: "/home/alfonso/.ciel/ihp-sg13g2/libs.ref/sg13g2_sram"

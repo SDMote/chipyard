@@ -40,7 +40,8 @@ import testchipip.tsi.{CanHavePeripheryUARTTSI, UARTTSIIO}
 import testchipip.ctc.{CanHavePeripheryCTC}
 import icenet.{CanHavePeripheryIceNIC, SimNetwork, NicLoopback, NICKey, NICIOvonly}
 import chipyard.{CanHaveMasterTLMemPort, ChipyardSystem, ChipyardSystemModule}
-import chipyard.example.{CanHavePeripheryGCD}
+import chipyard.example.{CanHavePeripheryGCD, SecPeriphTopIO, CanHaveSecPeriph}
+import chipyard.config.{IHPDigitalInIOCell, IHPDigitalOutIOCell}
 
 import scala.reflect.{ClassTag}
 
@@ -629,4 +630,20 @@ class WithCTCPunchthrough extends OverrideIOBinder({
     }).unzip
     (ports.toSeq, cells.flatten.toSeq)
   }
+
+
+class WithSecPunchthrough extends OverrideIOBinder({
+  (system: CanHaveSecPeriph) => system.sec_periph_io.map { periph =>
+    val sec_io = Wire(new SecPeriphTopIO)
+    sec_io.sram_on := periph.sram_on
+    periph.sram_rdy := sec_io.sram_rdy
+    sec_io.sram_data := periph.sram_data
+    val (sec_port, sec_cells) = IOCell.generateIOFromSignal(sec_io, "sec_periph")
+    //val io_cells = Seq(
+    //  IOCell.generateIOFromSignal(sec_io.sram_on, "sec_periph_sram_on"),
+    //  IOCell.generateIOFromSignal(sec_io.sram_rdy, "sec_periph_sram_rdy"),
+    //  IOCell.generateIOFromSignal(sec_io.sram_data, "sec_periph_sram_data")
+    //)
+    (Seq(SecPort(() => sec_port)), sec_cells)
+  }.getOrElse((Nil, Nil))
 })

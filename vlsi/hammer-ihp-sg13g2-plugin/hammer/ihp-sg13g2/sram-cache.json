@@ -1,0 +1,837 @@
+
+[
+{
+  "type" : "sram",
+  "name" : "RM_IHPSG13_1P_8192x32_c4",
+  "depth" : "8192",
+  "width" : 32,
+  "family" : "1RW",
+  "ports" : [ {
+    "clock port name" : "A_CLK",
+    "clock port polarity" : "positive edge",
+    "chip enable port name" : "A_MEN",
+    "chip enable port polarity" : "active high",
+    "write enable port name" : "A_WEN",
+    "write enable port polarity" : "active high",
+    "read enable port name" : "A_REN",
+    "read enable port polarity" : "active high",
+    "address port name" : "A_ADDR",
+    "address port polarity" : "active high",
+    "input port name" : "A_DIN",
+    "input port polarity" : "active high",
+    "output port name" : "A_DOUT",
+    "output port polarity" : "active high"
+  } ],
+  "extra ports" : [
+    {
+        "type" : "constant",
+        "value" : 1,
+        "width" : 1,
+        "name" : "A_DLY"
+    }
+  ]
+},
+
+{
+  "type" : "sram",
+  "name" : "RM_IHPSG13_1P_2048x64_c2_bm_bist",
+  "depth" : "2048",
+  "width" : 64,
+  "family" : "1RW",
+  "ports" : [ {
+    "clock port name" : "A_CLK",
+    "clock port polarity" : "positive edge",
+    "chip enable port name" : "A_MEN",
+    "chip enable port polarity" : "active high",
+    "write enable port name" : "A_WEN",
+    "write enable port polarity" : "active high",
+    "read enable port name" : "A_REN",
+    "read enable port polarity" : "active high",
+    "address port name" : "A_ADDR",
+    "address port polarity" : "active high",
+    "input port name" : "A_DIN",
+    "input port polarity" : "active high",
+    "output port name" : "A_DOUT",
+    "output port polarity" : "active high",
+    "mask port name" : "A_BM",
+    "mask port polarity" : "active high",
+    "mask granularity" : 1
+  } ],
+  "extra ports" : [
+    {
+        "type" : "constant",
+        "value" : 1,
+        "width" : 1,
+        "name" : "A_DLY"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_EN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 64,
+        "name" : "A_BIST_DIN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 64,
+        "name" : "A_BIST_BM"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 11,
+        "name" : "A_BIST_ADDR"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_WEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_MEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_REN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_CLK"
+    }
+  ]
+},
+
+{
+  "type" : "sram",
+  "name" : "RM_IHPSG13_1P_1024x32_c2_bm_bist",
+  "depth" : "1024",
+  "width" : 32,
+  "family" : "1RW",
+  "ports" : [ {
+    "clock port name" : "A_CLK",
+    "clock port polarity" : "positive edge",
+    "chip enable port name" : "A_MEN",
+    "chip enable port polarity" : "active high",
+    "write enable port name" : "A_WEN",
+    "write enable port polarity" : "active high",
+    "read enable port name" : "A_REN",
+    "read enable port polarity" : "active high",
+    "address port name" : "A_ADDR",
+    "address port polarity" : "active high",
+    "input port name" : "A_DIN",
+    "input port polarity" : "active high",
+    "output port name" : "A_DOUT",
+    "output port polarity" : "active high",
+    "mask port name" : "A_BM",
+    "mask port polarity" : "active high",
+    "mask granularity" : 1
+  } ],
+  "extra ports" : [
+    {
+        "type" : "constant",
+        "value" : 1,
+        "width" : 1,
+        "name" : "A_DLY"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_EN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 32,
+        "name" : "A_BIST_DIN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 32,
+        "name" : "A_BIST_BM"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 10,
+        "name" : "A_BIST_ADDR"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_WEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_MEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_REN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_CLK"
+    }
+  ]
+},
+
+{
+  "type" : "sram",
+  "name" : "RM_IHPSG13_1P_1024x16_c2_bm_bist",
+  "depth" : "1024",
+  "width" : 16,
+  "family" : "1RW",
+  "ports" : [ {
+    "clock port name" : "A_CLK",
+    "clock port polarity" : "positive edge",
+    "chip enable port name" : "A_MEN",
+    "chip enable port polarity" : "active high",
+    "write enable port name" : "A_WEN",
+    "write enable port polarity" : "active high",
+    "read enable port name" : "A_REN",
+    "read enable port polarity" : "active high",
+    "address port name" : "A_ADDR",
+    "address port polarity" : "active high",
+    "input port name" : "A_DIN",
+    "input port polarity" : "active high",
+    "output port name" : "A_DOUT",
+    "output port polarity" : "active high",
+    "mask port name" : "A_BM",
+    "mask port polarity" : "active high",
+    "mask granularity" : 1
+  } ],
+  "extra ports" : [
+    {
+        "type" : "constant",
+        "value" : 1,
+        "width" : 1,
+        "name" : "A_DLY"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_EN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 16,
+        "name" : "A_BIST_DIN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 16,
+        "name" : "A_BIST_BM"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 10,
+        "name" : "A_BIST_ADDR"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_WEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_MEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_REN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_CLK"
+    }
+  ]
+},
+
+{
+  "type" : "sram",
+  "name" : "RM_IHPSG13_1P_1024x8_c2_bm_bist",
+  "depth" : "1024",
+  "width" : 8,
+  "family" : "1RW",
+  "ports" : [ {
+    "clock port name" : "A_CLK",
+    "clock port polarity" : "positive edge",
+    "chip enable port name" : "A_MEN",
+    "chip enable port polarity" : "active high",
+    "write enable port name" : "A_WEN",
+    "write enable port polarity" : "active high",
+    "read enable port name" : "A_REN",
+    "read enable port polarity" : "active high",
+    "address port name" : "A_ADDR",
+    "address port polarity" : "active high",
+    "input port name" : "A_DIN",
+    "input port polarity" : "active high",
+    "output port name" : "A_DOUT",
+    "output port polarity" : "active high",
+    "mask port name" : "A_BM",
+    "mask port polarity" : "active high",
+    "mask granularity" : 1
+  } ],
+  "extra ports" : [
+    {
+        "type" : "constant",
+        "value" : 1,
+        "width" : 1,
+        "name" : "A_DLY"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_EN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 8,
+        "name" : "A_BIST_DIN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 8,
+        "name" : "A_BIST_BM"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 10,
+        "name" : "A_BIST_ADDR"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_WEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_MEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_REN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_CLK"
+    }
+  ]
+},
+
+{
+  "type" : "sram",
+  "name" : "RM_IHPSG13_1P_4096x16_c3_bm_bist",
+  "depth" : "4096",
+  "width" : 16,
+  "family" : "1RW",
+  "ports" : [ {
+    "clock port name" : "A_CLK",
+    "clock port polarity" : "positive edge",
+    "chip enable port name" : "A_MEN",
+    "chip enable port polarity" : "active high",
+    "write enable port name" : "A_WEN",
+    "write enable port polarity" : "active high",
+    "read enable port name" : "A_REN",
+    "read enable port polarity" : "active high",
+    "address port name" : "A_ADDR",
+    "address port polarity" : "active high",
+    "input port name" : "A_DIN",
+    "input port polarity" : "active high",
+    "output port name" : "A_DOUT",
+    "output port polarity" : "active high",
+    "mask port name" : "A_BM",
+    "mask port polarity" : "active high",
+    "mask granularity" : 1
+  } ],
+  "extra ports" : [
+    {
+        "type" : "constant",
+        "value" : 1,
+        "width" : 1,
+        "name" : "A_DLY"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_EN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 16,
+        "name" : "A_BIST_DIN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 16,
+        "name" : "A_BIST_BM"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 11,
+        "name" : "A_BIST_ADDR"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_WEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_MEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_REN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_CLK"
+    }
+  ]
+},
+
+{
+  "type" : "sram",
+  "name" : "RM_IHPSG13_1P_4096x8_c3_bm_bist",
+  "depth" : "4096",
+  "width" : 8,
+  "family" : "1RW",
+  "ports" : [ {
+    "clock port name" : "A_CLK",
+    "clock port polarity" : "positive edge",
+    "chip enable port name" : "A_MEN",
+    "chip enable port polarity" : "active high",
+    "write enable port name" : "A_WEN",
+    "write enable port polarity" : "active high",
+    "read enable port name" : "A_REN",
+    "read enable port polarity" : "active high",
+    "address port name" : "A_ADDR",
+    "address port polarity" : "active high",
+    "input port name" : "A_DIN",
+    "input port polarity" : "active high",
+    "output port name" : "A_DOUT",
+    "output port polarity" : "active high",
+    "mask port name" : "A_BM",
+    "mask port polarity" : "active high",
+    "mask granularity" : 1
+  } ],
+  "extra ports" : [
+    {
+        "type" : "constant",
+        "value" : 1,
+        "width" : 1,
+        "name" : "A_DLY"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_EN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 8,
+        "name" : "A_BIST_DIN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 8,
+        "name" : "A_BIST_BM"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 11,
+        "name" : "A_BIST_ADDR"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_WEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_MEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_REN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_CLK"
+    }
+  ]
+},
+
+{
+  "type" : "sram",
+  "name" : "RM_IHPSG13_1P_512x32_c2_bm_bist",
+  "depth" : "512",
+  "width" : 32,
+  "family" : "1RW",
+  "ports" : [ {
+    "clock port name" : "A_CLK",
+    "clock port polarity" : "positive edge",
+    "chip enable port name" : "A_MEN",
+    "chip enable port polarity" : "active high",
+    "write enable port name" : "A_WEN",
+    "write enable port polarity" : "active high",
+    "read enable port name" : "A_REN",
+    "read enable port polarity" : "active high",
+    "address port name" : "A_ADDR",
+    "address port polarity" : "active high",
+    "input port name" : "A_DIN",
+    "input port polarity" : "active high",
+    "output port name" : "A_DOUT",
+    "output port polarity" : "active high",
+    "mask port name" : "A_BM",
+    "mask port polarity" : "active high",
+    "mask granularity" : 1
+  } ],
+  "extra ports" : [
+    {
+        "type" : "constant",
+        "value" : 1,
+        "width" : 1,
+        "name" : "A_DLY"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_EN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 32,
+        "name" : "A_BIST_DIN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 32,
+        "name" : "A_BIST_BM"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 9,
+        "name" : "A_BIST_ADDR"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_WEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_MEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_REN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_CLK"
+    }
+  ]
+},
+
+{
+  "type" : "sram",
+  "name" : "RM_IHPSG13_1P_256x32_c2_bm_bist",
+  "depth" : "256",
+  "width" : 32,
+  "family" : "1RW",
+  "ports" : [ {
+    "clock port name" : "A_CLK",
+    "clock port polarity" : "positive edge",
+    "chip enable port name" : "A_MEN",
+    "chip enable port polarity" : "active high",
+    "write enable port name" : "A_WEN",
+    "write enable port polarity" : "active high",
+    "read enable port name" : "A_REN",
+    "read enable port polarity" : "active high",
+    "address port name" : "A_ADDR",
+    "address port polarity" : "active high",
+    "input port name" : "A_DIN",
+    "input port polarity" : "active high",
+    "output port name" : "A_DOUT",
+    "output port polarity" : "active high",
+    "mask port name" : "A_BM",
+    "mask port polarity" : "active high",
+    "mask granularity" : 1
+  } ],
+  "extra ports" : [
+    {
+        "type" : "constant",
+        "value" : 1,
+        "width" : 1,
+        "name" : "A_DLY"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_EN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 32,
+        "name" : "A_BIST_DIN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 32,
+        "name" : "A_BIST_BM"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 8,
+        "name" : "A_BIST_ADDR"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_WEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_MEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_REN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_CLK"
+    }
+  ]
+},
+
+{
+  "type" : "sram",
+  "name" : "RM_IHPSG13_1P_256x8_c3_bm_bist",
+  "depth" : "256",
+  "width" : 8,
+  "family" : "1RW",
+  "ports" : [ {
+    "clock port name" : "A_CLK",
+    "clock port polarity" : "positive edge",
+    "chip enable port name" : "A_MEN",
+    "chip enable port polarity" : "active high",
+    "write enable port name" : "A_WEN",
+    "write enable port polarity" : "active high",
+    "read enable port name" : "A_REN",
+    "read enable port polarity" : "active high",
+    "address port name" : "A_ADDR",
+    "address port polarity" : "active high",
+    "input port name" : "A_DIN",
+    "input port polarity" : "active high",
+    "output port name" : "A_DOUT",
+    "output port polarity" : "active high",
+    "mask port name" : "A_BM",
+    "mask port polarity" : "active high",
+    "mask granularity" : 1
+  } ],
+  "extra ports" : [
+    {
+        "type" : "constant",
+        "value" : 1,
+        "width" : 1,
+        "name" : "A_DLY"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_EN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 8,
+        "name" : "A_BIST_DIN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 8,
+        "name" : "A_BIST_BM"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 8,
+        "name" : "A_BIST_ADDR"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_WEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_MEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_REN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_CLK"
+    }
+  ]
+},
+
+{
+  "type" : "sram",
+  "name" : "RM_IHPSG13_1P_64x64_c2_bm_bist",
+  "depth" : "64",
+  "width" : 64,
+  "family" : "1RW",
+  "ports" : [ {
+    "clock port name" : "A_CLK",
+    "clock port polarity" : "positive edge",
+    "chip enable port name" : "A_MEN",
+    "chip enable port polarity" : "active high",
+    "write enable port name" : "A_WEN",
+    "write enable port polarity" : "active high",
+    "read enable port name" : "A_REN",
+    "read enable port polarity" : "active high",
+    "address port name" : "A_ADDR",
+    "address port polarity" : "active high",
+    "input port name" : "A_DIN",
+    "input port polarity" : "active high",
+    "output port name" : "A_DOUT",
+    "output port polarity" : "active high",
+    "mask port name" : "A_BM",
+    "mask port polarity" : "active high",
+    "mask granularity" : 1
+  } ],
+  "extra ports" : [
+    {
+        "type" : "constant",
+        "value" : 1,
+        "width" : 1,
+        "name" : "A_DLY"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_EN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 64,
+        "name" : "A_BIST_DIN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 64,
+        "name" : "A_BIST_BM"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 6,
+        "name" : "A_BIST_ADDR"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_WEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_MEN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_REN"
+    },    {
+        "type" : "constant",
+        "value" : 0,
+        "width" : 1,
+        "name" : "A_BIST_CLK"
+    }
+  ]
+},
+
+{
+  "type" : "sram",
+  "name" : "RM_IHPSG13_2P_64x32_c2",
+  "depth" : "64",
+  "width" : 32,
+  "family" : "2RW",
+  "mask" : "false",
+  "ports" : [ {
+    "clock port name" : "A_CLK",
+    "clock port polarity" : "positive edge",
+    "chip enable port name" : "A_MEN",
+    "chip enable port polarity" : "active high",
+    "write enable port name" : "A_WEN",
+    "write enable port polarity" : "active high",
+    "read enable port name" : "A_REN",
+    "read enable port polarity" : "active high",
+    "address port name" : "A_ADDR",
+    "address port polarity" : "active high",
+    "input port name" : "A_DIN",
+    "input port polarity" : "active high",
+    "output port name" : "A_DOUT",
+    "output port polarity" : "active high"
+  },{
+    "clock port name" : "B_CLK",
+    "clock port polarity" : "positive edge",
+    "chip enable port name" : "B_MEN",
+    "chip enable port polarity" : "active high",
+    "write enable port name" : "B_WEN",
+    "write enable port polarity" : "active high",
+    "read enable port name" : "B_REN",
+    "read enable port polarity" : "active high",
+    "address port name" : "B_ADDR",
+    "address port polarity" : "active high",
+    "input port name" : "B_DIN",
+    "input port polarity" : "active high",
+    "output port name" : "B_DOUT",
+    "output port polarity" : "active high"
+  } ],
+  "extra ports" : [
+    {
+        "type" : "constant",
+        "value" : 1,
+        "width" : 1,
+        "name" : "A_DLY"
+    },    {
+        "type" : "constant",
+        "value" : 1,
+        "width" : 1,
+        "name" : "B_DLY"
+    }
+  ]
+}
+]

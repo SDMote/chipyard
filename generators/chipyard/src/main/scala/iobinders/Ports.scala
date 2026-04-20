@@ -19,6 +19,7 @@ import freechips.rocketchip.subsystem.{MemoryPortParams, MasterPortParams, Slave
 import freechips.rocketchip.devices.debug.{ClockedDMIIO}
 import freechips.rocketchip.tilelink.{TLBundle}
 import org.chipsalliance.diplomacy.nodes.{HeterogeneousBag}
+import chipyard.example.{SecPeriphTopIO}
 
 trait Port[T <: Data] {
   val getIO: () => T
@@ -113,8 +114,5 @@ case class TLMemPort       (val getIO: () => HeterogeneousBag[TLBundle])
 case class GCDBusyPort     (val getIO: () => Bool)
     extends Port[Bool]
 
-case class OffchipSelPort  (val getIO: () => UInt)
-    extends Port[UInt]
-
-case class CTCPort (val getIO: () => Data, val portId: Int) 
-    extends Port[Data]
+case class SecPort     (val getIO: () => SecPeriphTopIO)
+    extends Port[SecPeriphTopIO]
